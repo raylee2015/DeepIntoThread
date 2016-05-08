@@ -55,18 +55,10 @@ class ThreadFour implements Runnable {
 
 class MyService2 {
 
-	private Object object1;
-	private Object object2;
-
-	private int id = 0;
-
-	public MyService2() {
-		object1 = new Object();
-		object2 = new Object();
-	}
+	private Integer id = 0;
 
 	public void updateA() throws InterruptedException {
-		synchronized (object1) {
+		synchronized (id) {
 			for (int i = 0; i < 5; i++) {
 				System.out.println(Thread.currentThread().getName() + " " + id++);
 				Thread.sleep(50);
@@ -75,7 +67,7 @@ class MyService2 {
 	}
 
 	public void updateB() throws InterruptedException {
-		synchronized (object2) {
+		synchronized (id) {
 			for (int i = 0; i < 5; i++) {
 				System.out.println(Thread.currentThread().getName() + " " + id++);
 				Thread.sleep(100);
