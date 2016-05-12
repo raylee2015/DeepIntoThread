@@ -10,9 +10,11 @@ public class DirtyReadWithSynchBlock {
 		MyService2 myService = new MyService2();
 		ThreadThree threadThree = new ThreadThree(myService);
 		Thread thread = new Thread(threadThree);
+		thread.setName("thread A");
 		thread.start();
 		ThreadFour threadFour = new ThreadFour(myService);
 		Thread thread2 = new Thread(threadFour);
+		thread2.setName("thread B");
 		thread2.start();
 	}
 }
@@ -60,8 +62,10 @@ class MyService2 {
 	public void updateA() throws InterruptedException {
 		synchronized (id) {
 			for (int i = 0; i < 5; i++) {
+				System.out.println("id:" + id);
 				System.out.println(Thread.currentThread().getName() + " " + id++);
 				Thread.sleep(50);
+				System.out.println("-------------------");
 			}
 		}
 	}
@@ -69,8 +73,10 @@ class MyService2 {
 	public void updateB() throws InterruptedException {
 		synchronized (id) {
 			for (int i = 0; i < 5; i++) {
+				System.out.println("id:" + id);
 				System.out.println(Thread.currentThread().getName() + " " + id++);
 				Thread.sleep(100);
+				System.out.println("-------------------");
 			}
 		}
 	}
