@@ -1,6 +1,6 @@
 package com.ray.deepintothread.ch03.topic_1;
 
-public class SolveDeadFor implements Runnable {
+public class DeadForSynch {
 	private boolean isStop = false;
 
 	public boolean isStop() {
@@ -19,21 +19,8 @@ public class SolveDeadFor implements Runnable {
 	}
 
 	public static void main(String[] args) throws InterruptedException {
-		SolveDeadFor deadFor = new SolveDeadFor();
-		Thread thread = new Thread(deadFor);
-		thread.start();
-
-		Thread.sleep(1000);
+		DeadForSynch deadFor = new DeadForSynch();
+		deadFor.test();
 		deadFor.setStop(true);
-		System.out.println("-------stop--------");
-	}
-
-	@Override
-	public void run() {
-		try {
-			test();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 	}
 }
